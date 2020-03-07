@@ -43,4 +43,4 @@ sudo sed -i -re "s/(CONFIG_COMPUTE_HOSTS=.+)/\1,10.10.1.2/gi" test.cfg
 sudo sed -i -re 's/(CONFIG_KEYSTONE_ADMIN_PW=)\w+/\1adminpass/gi' test.cfg
 sudo sed -i -re 's/(CONFIG_KEYSTONE_DEMO_PW=)\w+/\1demopass/gi' test.cfg
 
-#sudo packstack --answer-file=test.cfg
+sudo packstack --answer-file=test.cfg
