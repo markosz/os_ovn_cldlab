@@ -49,11 +49,8 @@ link.addInterface(iface1)
 link.addInterface(iface2)
 
 # Install and execute a script that is contained in the repository.
-node2.addService(rspec.Execute(shell="sh", command="/local/repository/fix.sh"))
-node2.addService(rspec.Execute(shell="sh", command="/local/repository/node2_ip.sh"))
+node2.addService(rspec.Execute(shell="bash", command="/local/repository/node2.sh"))
 
-node1.addService(rspec.Execute(shell="sh", command="/local/repository/inst_packstack_stein.sh"))
-node1.addService(rspec.Execute(shell="sh", command="/local/repository/fix.sh"))
-node1.addService(rspec.Execute(shell="sh", command="/local/repository/conf_and_run.sh"))
+node1.addService(rspec.Execute(shell="bash", command="/local/repository/node1.sh"))
 
 portal.context.printRequestRSpec()
