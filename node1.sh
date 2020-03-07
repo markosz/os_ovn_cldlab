@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### logging preparation
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+#SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WRKDIR=/tmp/git-profile-init
 username=$(id -nu)
 usergid=$(id -ng)
