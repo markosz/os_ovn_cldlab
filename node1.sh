@@ -9,7 +9,7 @@ usergid=$(id -ng)
 sudo mkdir -p ${WRKDIR}
 sudo chown ${username}:${usergid} ${WRKDIR}/ -R
 
-cd /tmp
+cd ${WRKDIR}
 exec >> ${WRKDIR}/deploy.log
 exec 2>&1
 
@@ -36,7 +36,7 @@ sudo cp ans.cfg test.cfg
 sudo sed -i -re 's/(CONFIG_CEILOMETER_INSTALL=)\w+/\1n/gi' test.cfg
 sudo sed -i -re 's/(CONFIG_AODH_INSTALL=)\w+/\1n/gi' test.cfg
 
-FILE=/tmp/node2_ip
+FILE=${WRKDIR}/node2_ip
 RDS=3  #rounds
 while [ $RDS -gt 0 ]
 do
