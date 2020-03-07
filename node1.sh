@@ -36,23 +36,9 @@ sudo cp ans.cfg test.cfg
 sudo sed -i -re 's/(CONFIG_CEILOMETER_INSTALL=)\w+/\1n/gi' test.cfg
 sudo sed -i -re 's/(CONFIG_AODH_INSTALL=)\w+/\1n/gi' test.cfg
 
-FILE=${WRKDIR}/node2_ip
-RDS=3  #rounds
-while [ $RDS -gt 0 ]
-do
-  if [ -f "$FILE" ]
-    then
-      N2=`sudo cat $FILE`
-      echo "got node2 IP address: " $N2
-      sudo sed -i -re "s/(CONFIG_COMPUTE_HOSTS=.+)/\1,$N2/gi" test.cfg 
-      RDS=0
-    else
-      echo "waiting 5sec for node2 IP address ..." $(( 4 - $RDS ))      
-      sleep 5
-      RDS=$(( $RDS - 1 ))
-      if [ $RDS -eq 0 ]; then echo "timeout for node2 IP address"; fi
-  fi
-done
+CLPUBNET=`ifconfig | grep "inet " |  awk 'NR == 1 {print $2}'`
+sudo sed -i -re 's/($CLPUBNET)/10.10.1.1/gi' test.cfg
+sudo sed -i -re "s/(CONFIG_COMPUTE_HOSTS=.+)/\1,10.10.1.2/gi" test.cfg 
 
 sudo sed -i -re 's/(CONFIG_KEYSTONE_ADMIN_PW=)\w+/\1adminpass/gi' test.cfg
 sudo sed -i -re 's/(CONFIG_KEYSTONE_DEMO_PW=)\w+/\1demopass/gi' test.cfg
